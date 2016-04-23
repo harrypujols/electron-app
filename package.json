@@ -1,0 +1,21 @@
+{
+  "name": "urinal-checkmate",
+  "version": "1.0.0",
+  "description": "Urinal Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "keywords": [
+    "Electron",
+    "urinal",
+    "checkmate",
+    "harry"
+  ],
+  "author": "Harry",
+  "license": "CC0-1.0",
+  "devDependencies": {
+  "electron-builder": "^3.9.0",
+  "electron-prebuilt": "^0.37.0"
+  }
+}
