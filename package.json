@@ -1,21 +1,17 @@
 {
-  "name": "urinal-checkmate",
+  "name": "electron-app",
   "version": "1.0.0",
-  "description": "Urinal Desktop App",
-  "main": "main.js",
+  "description": "A desktop app using Electron",
+  "main": "gulpfile.js",
   "scripts": {
-    "start": "electron main.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Electron",
-    "urinal",
-    "checkmate",
-    "harry"
-  ],
   "author": "Harry",
-  "license": "CC0-1.0",
+  "license": "GNU",
   "devDependencies": {
-  "electron-builder": "^3.9.0",
-  "electron-prebuilt": "^0.37.0"
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.37.7",
+    "gulp": "^3.9.1",
+    "gulp-exec": "^2.1.2"
   }
 }
