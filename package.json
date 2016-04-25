@@ -12,6 +12,6 @@
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.7",
     "gulp": "^3.9.1",
-    "gulp-exec": "^2.1.2"
+    "gulp-electron": "^0.1.2"
   }
 }
