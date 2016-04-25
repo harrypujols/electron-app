@@ -4,7 +4,9 @@
   "description": "A desktop app using Electron",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./app/main.js",
+    "build": "electron-packager ./app $npm_package_productName --platform=darwin --arch=x64 --ignore=node_modules --icon=icons/icon.icns"
   },
   "author": "Harry",
   "license": "GNU",
