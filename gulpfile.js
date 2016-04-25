@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var electron = require('gulp-electron');
-var packageJson = require('./src/package.json');
+var packageJson = require('./app/package.json');
 
 gulp.task('electron', function() {
 
