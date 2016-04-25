@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-516.9 183.4 248.9 369.8" style="enable-background:new -516.9 183.4 248.9 369.8;" xml:space="preserve" class="the-urinal">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-width:5;stroke-miterlimit:10;}
+</style>
+<title>urinal</title>
+<g>
+	<rect x="-399.9" y="234.6" class="st0" width="13.5" height="33.6"/>
+	<path class="st0" d="M-393,514.9h-0.3c-6.6,0-12-5.4-12-12v-53.2c0-6.6,5.4-12,12-12h0.3c6.6,0,12,5.4,12,12v53.2
+		C-381,509.5-386.4,514.9-393,514.9z"/>
+	<path class="st0" d="M-318.2,491.9H-468c-6.6,0-12-5.4-12-12V278.3c0-6.6,5.4-12,12-12h149.8c6.6,0,12,5.4,12,12v201.6
+		C-306.2,486.5-311.6,491.9-318.2,491.9z"/>
+	<path class="st0" d="M-335.8,282.1l-115.6,0.5c-6.6,0-12,5.5-11.9,12.1l0.7,157.1c0,6.6,5.5,12,12.1,11.9l17.8-0.1
+		c1.5,7.1,18.9,12.7,40.1,12.6c21.2-0.1,38.5-5.8,39.9-13l17.8-0.1c6.6,0,12-5.5,11.9-12.1l-0.7-157.1
+		C-323.7,287.4-329.2,282-335.8,282.1z"/>
+	<rect x="-409.4" y="211.1" class="st0" width="32.6" height="33"/>
+</g>
+</svg>
