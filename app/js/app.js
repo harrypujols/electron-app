@@ -1,166 +1,113 @@
-var app = new Vue({
-  el: '#urinal-checkmate',
+new Vue({
+  el: '#app',
 
   data: {
-    database: 'data/data.json',
-    page: { message: 'loading...' },
-    restroom: {},
-    stage: 0,
-    score: 0,
-    attempt: 0,
-    urinals: null,
-    reload: false,
-    endgame: false
+    url: 'http://api.wunderground.com/api/',
+    lat: '40.71',
+    lon: '-74.01',
+    appid: '09d7033777846fa8',
+    current: {},
+    forecast: {},
+    clock: '00:00:00',
+    prefs: {},
+    pm: false,
+    expand: false,
+    loaded: false
   },
 
   ready: function() {
-    if (Modernizr.touch) {
-      this.page.message = 'Play it on your desktop browser'
-    } else {
-      this.import()
-    }
+    this.settings()
+    this.geolocation()
   },
 
   watch: {
-    'page.message': function (nuval, olval) {
-      console.log('new: %s, old: %s', nuval, olval)
-
-      if (nuval == 'checkmate') {
-        if (this.attempt <= 1) {
-          this.score++
-        }
-
-        this.reload = true
-      }
+    lat: function() {
+      this.update()
+      this.time()
     },
 
-    'restroom': function() {
-      if (typeof null == 'object') {
-        this.urinals = this.restroom[this.stage].urinals
-        return this.urinals
-      }
+    'prefs.fahrenheit': function() {
+      localStorage.setItem('preferences', JSON.stringify(this.prefs))
     },
 
-    'stage': function() {
-      if (typeof null == 'object') {
-        this.urinals = this.restroom[this.stage].urinals
-        return this.urinals
+    'prefs.hour12': function() {
+      localStorage.setItem('preferences', JSON.stringify(this.prefs))
+    },
+
+    'current.icon_url': function(result) {
+      if( result.indexOf('nt') >= 0 && this.current.icon == 'clear' ) {
+        this.current.icon = 'moon'
       }
     }
   },
 
-  computed: {
-    checkmate: function() {
-      var result = this.restroom[this.stage].checkmate - 1
-      if (result < 0) {
-        result = 0
-      }
-      return result
-    },
-
-    enemy: function() {
-      var enemies = this.restroom[this.stage].enemies
-      var enemy = []
-      for (i = 0; i < enemies.length; i++) {
-        enemy.push(enemies[i] -1);
-      }
-      return enemy
-    }
-  },
-
-  directives: {
-    include: function() {
-      var url = this.expression
-      var that = this
-      var request = new XMLHttpRequest()
-      request.open('GET', url, true)
-      request.onreadystatechange = function() {
-        if (this.readyState !== 4) return
-        if (this.status !== 200) return
-        that.el.innerHTML = this.responseText
-      }
-      request.send();
-    },
-
-    draggable: {
-      bind: function() {
-        this.el.draggable = 'true',
-        this.el.ondragstart = function(ev) {
-          ev.dataTransfer.setData('text', ev.target.id)
-          this.classList.add('dragging')
-          console.log('dragging...')
-        }
-
-        this.el.ondragend = function() {
-          this.classList.remove('dragging')
-        }
-      }
-    },
-
-    droppable: {
-      update: function(drop) {
-        var selected = drop
-        this.el.ondrop = function(ev) {
-          ev.preventDefault()
-          ev.stopPropagation()
-          var data = ev.dataTransfer.getData('text')
-          selected(this.id)
-          this.appendChild(document.getElementById(data))
-          return false
-        }
-
-        this.el.ondragover = function(ev) {
-          ev.preventDefault();
-        }
-      }
+  filters: {
+    rounded: function(val) {
+      return typeof val == 'undefined' ? 0 : val.toFixed(0)
     }
   },
 
   methods: {
-    import: function() {
+    update: function() {
+      this.$http({
+        url: this.url + this.appid + '/conditions/q/' + this.lat + ',' + this.lon + '.json',
+        method: 'GET'
+     }).then(function (result) {
+        this.current = result.data.current_observation
+      }, function (response) {
+        console.log('fail')
+      }),
+
+      this.$http({
+        url: this.url + this.appid + '/forecast/q/' + this.lat + ',' + this.lon + '.json',
+        method: 'GET'
+     }).then(function (result) {
+        this.forecast = result.data.forecast.simpleforecast.forecastday
+        this.loaded = true
+      }, function (response) {
+        console.log('fail')
+      })
+    },
+
+    geolocation: function() {
       var that = this
-      var request = new XMLHttpRequest()
-      request.open('GET', this.database)
-      request.onload = function () {
-        var result = JSON.parse(request.responseText)
-        that.page = result.page
-        that.restroom = result.restroom
+      navigator.geolocation.getCurrentPosition( function(position) {
+        that.lat = position.coords.latitude.toFixed(2)
+        that.lon = position.coords.longitude.toFixed(2)
+      })
+    },
+
+    time: function() {
+      var today = new Date()
+      var h = today.getHours()
+      var m = today.getMinutes()
+      var s = today.getSeconds()
+      m = this.addzero(m)
+      s = this.addzero(s)
+
+      if (h >= 12) {
+        this.pm = true
       }
-      request.send();
-    },
 
-    drop: function(urinal) {
-      if (urinal == 'correct') {
-        this.page.message = 'checkmate'
-      } else {
-        this.page.message = 'wrong'
+      if (this.prefs.hour12) {
+        h = h % 12 || 12
       }
-      this.attempt++
+
+      this.clock = h + ":" + m + ":" + s
+      var t = setTimeout(this.time, 500)
     },
 
-    comeback: function() {
-      var entrance = document.getElementById('start-position')
-      var man = document.getElementById('man')
-      entrance.appendChild(man)
+    addzero: function(i) {
+      if (i < 10) {i = "0" + i}
+      return i
     },
 
-    continue: function() {
-      var last = this.restroom.length - 1
-      if (this.stage >= last) {
-        this.stage = last
-        this.endgame = true
-        this.page.message = 'Game Over'
-      } else {
-        this.stage++
-        this.reload = false
-        this.attempt = 0
-        this.import()
-        this.comeback()
+    settings: function() {
+      var result = localStorage.getItem('preferences')
+      this.prefs = JSON.parse(result)
+      if (this.prefs == null) {
+        this.prefs = { hour12: true, fahrenheit: true }
       }
-    },
-
-    restart: function() {
-      location.reload()
     }
   }
 

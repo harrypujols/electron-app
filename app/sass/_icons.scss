@@ -1,0 +1,141 @@
+// https://gist.github.com/tbranyen/62d974681dea8ee0caa1
+@font-face {
+    font-family: 'icons';
+    src:
+        url('../fonts/icons.ttf?2obxfx') format('truetype'),
+        url('../fonts/icons.woff?2obxfx') format('woff'),
+        url('../fonts/icons.svg?2obxfx#icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sun {
+  &:before {
+      content: "\f00d";
+  }
+}
+.icon-thunder {
+  &:before {
+      content: "\f016";
+  }
+}
+.icon-showers {
+  &:before {
+      content: "\f019";
+  }
+}
+.icon-rain {
+  &:before {
+      content: "\f01a";
+  }
+}
+.icon-snow {
+  &:before {
+      content: "\f01b";
+  }
+}
+.icon-thunderstorm {
+  &:before {
+      content: "\f01e";
+  }
+}
+.icon-fog {
+  &:before {
+      content: "\f021";
+  }
+}
+.icon-moon {
+  &:before {
+      content: "\f02e";
+  }
+}
+.icon-cloud {
+  &:before {
+      content: "\f031";
+  }
+}
+.icon-celsius {
+  &:before {
+      content: "\f03c";
+  }
+}
+.icon-overcast {
+  &:before {
+      content: "\f041";
+  }
+}
+.icon-degree {
+  &:before {
+      content: "\f042";
+  }
+}
+.icon-fahrenheit {
+  &:before {
+      content: "\f045";
+  }
+}
+.icon-sunrise {
+  &:before {
+      content: "\f046";
+  }
+}
+.icon-sunset {
+  &:before {
+      content: "\f047";
+  }
+}
+.icon-wind {
+  &:before {
+      content: "\f050";
+  }
+}
+.icon-thermometer {
+  &:before {
+      content: "\f053";
+  }
+}
+.icon-temperature {
+  &:before {
+      content: "\f054";
+  }
+}
+.icon-mercury {
+  &:before {
+      content: "\f055";
+  }
+}
+.icon-humidity {
+  &:before {
+      content: "\f078";
+  }
+}
+.icon-pressure {
+  &:before {
+      content: "\f079";
+  }
+}
+.icon-umbrella {
+  &:before {
+      content: "\f084";
+  }
+}
+.icon-cog {
+  &:before {
+      content: "\e023";
+  }
+}
